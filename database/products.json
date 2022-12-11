@@ -1,0 +1,9 @@
+{
+    "_default": {
+        "1": {
+            "name": "Paracetamol",
+            "price": 20.9,
+            "quantity": 45
+        }
+    }
+}

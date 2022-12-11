@@ -1,0 +1,9 @@
+{
+    "_default": {
+        "1": {
+            "name": "João",
+            "office": "Gerente",
+            "password": "123"
+        }
+    }
+}

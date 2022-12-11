@@ -1,0 +1,10 @@
+{
+    "_default": {
+        "1": {
+            "client": "Eduardo",
+            "employee": "João",
+            "product": "Paracetamol",
+            "quantity": 30
+        }
+    }
+}

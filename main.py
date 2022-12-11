@@ -33,13 +33,15 @@ if opt == '1':
     2. List products
     3. Delete product
     4. Update product
-    5. Buy product
-    6. Replenish Stock
-    7. Exit
+    5. Exit
     ''')
 
         if opction == '1':
             name = input('Name: ')
+            for product in dbProducts:
+                if product['name'] == name:
+                    print('Product already exists')
+                    exit()
             price = float(input('Price: '))
             quantity = int(input('Quantity: '))
 
@@ -56,6 +58,13 @@ if opt == '1':
 
         elif opction == '4':
             name = input('Name: ')
+            for product in dbProducts:
+                if product['name'] == name:
+                    continue
+
+                else:
+                    print('Product not found')
+                    exit()
             price = float(input('Price: '))
             quantity = int(input('Quantity: '))
 
@@ -63,22 +72,6 @@ if opt == '1':
             dbProducts.update(product.as_dict(), where('name') == name)
 
         elif opction == '5':
-            name = input('Name: ')
-            quantity = int(input('Quantity: '))
-
-            product = dbProducts.search(where('name') == name)[0]
-            product['quantity'] -= quantity
-            dbProducts.update(product, where('name') == name)
-
-        elif opction == '6':
-            name = input('Name: ')
-            quantity = int(input('Quantity: '))
-
-            product = dbProducts.search(where('name') == name)[0]
-            product['quantity'] += quantity
-            dbProducts.update(product, where('name') == name)
-
-        elif opction == '7':
             break
 
         else:
@@ -97,6 +90,10 @@ elif opt == '2':
 
         if opction == '1':
             name = input('Name: ')
+            for client in dbClients:
+                if client['name'] == name:
+                    print('Client already exists')
+                    exit()
             phone = input('Phone: ')
             email = input('Email: ')
 
@@ -109,10 +106,24 @@ elif opt == '2':
 
         elif opction == '3':
             name = input('Name: ')
+            for client in dbClients:
+                if client['name'] == name:
+                    continue
+
+                else:
+                    print('Client not found')
+                    exit()
             dbClients.remove(where('name') == name)
 
         elif opction == '4':
             name = input('Name: ')
+            for client in dbClients:
+                if client['name'] == name:
+                    continue
+
+                else:
+                    print('Client not found')
+                    exit()
             phone = input('Phone: ')
             email = input('Email: ')
 
@@ -138,6 +149,10 @@ elif opt == '3':
 
         if opction == '1':
             name = input('Name: ')
+            for employee in dbEmployees:
+                if employee['name'] == name:
+                    print('Employee already exists')
+                    exit()
             password = input('Password: ')
             office = input('Office: ')
 
@@ -150,10 +165,24 @@ elif opt == '3':
 
         elif opction == '3':
             name = input('Name: ')
+            for employee in dbEmployees:
+                if employee['name'] == name:
+                    continue
+
+                else:
+                    print('Employee not found')
+                    exit()
             dbEmployees.remove(where('name') == name)
 
         elif opction == '4':
             name = input('Name: ')
+            for employee in dbEmployees:
+                if employee['name'] == name:
+                    continue
+
+                else:
+                    print('Employee not found')
+                    exit()
             password = input('Password: ')
             office = input('Office: ')
 
@@ -209,6 +238,14 @@ elif opt == '4':
                     exit()
 
             quantity = int(input('Quantity: '))
+            for product in dbProducts:
+                if product['quantity'] >= quantity:
+                    product['quantity'] -= quantity
+                    continue
+
+                else:
+                    print('Insufficient quantity')
+                    exit()
             saleObject = salesClass.Sale(
                 nameCliente, nameEmployee, nameProduct, quantity)
             dbSales.insert(saleObject.as_dict())
